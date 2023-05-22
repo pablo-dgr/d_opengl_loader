@@ -540,13 +540,13 @@ string[string] getGlTypedefMap()
         "GLsync": "void*",
         "_cl_context": "",
         "_cl_event": "",
-        "GLDEBUGPROC": "void function(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)",
-        "GLDEBUGPROCARB": "void function(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)",
-        "GLDEBUGPROCKHR": "void function(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)",
-        "GLDEBUGPROCAMD": "void function(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam)",
+        "GLDEBUGPROC": "extern(System) void function(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)",
+        "GLDEBUGPROCARB": "extern(System) void function(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)",
+        "GLDEBUGPROCKHR": "extern(System) void function(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)",
+        "GLDEBUGPROCAMD": "extern(System) void function(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam)",
         "GLhalfNV": "ushort",
         "GLvdpauSurfaceNV": "long",
-        "GLVULKANPROCNV": "void function()",
+        "GLVULKANPROCNV": "extern(System) void function()",
     ];
 
     return glTypedefMap;
@@ -1190,7 +1190,7 @@ void writeOutput(string filename, string[string] glTypedefMap, RelevantGlFeature
     }
     output.writeln("");
 
-    output.writeln("alias FnloadOpenglProc = void* function(string name);");
+    output.writeln("alias FnloadOpenglProc = void* function(const(char)* name);");
     output.writeln("");
 
     output.writeln("bool loadOpenGlProcs(FnloadOpenglProc loadOpenGlProc)");
